@@ -8,201 +8,91 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #b89b65; outline-offset: 4px; }
 .app-shell {
-  width: 100%;
-  min-height: 100vh;
-  padding: 24px;
-  background:
-    radial-gradient(ellipse at 50% 40%, #fffdf8 0%, transparent 58%),
-    #f7f4ed;
+  width: 100%; min-height: 100vh; padding: 24px;
+  background: radial-gradient(ellipse at 50% 40%, #fffdf8 0%, transparent 58%), #f7f4ed;
 }
-
-.topbar {
-  width: min(100%, 1040px);
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.topbar { width: min(100%, 1040px); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.brand { color: #293d5e; text-decoration: none; font-size: 1.2rem; font-weight: bold; letter-spacing: .2em; }
+.brand-button { padding: 6px 0; background: none; border: 0; }
+.header-actions { display: flex; align-items: center; gap: 14px; }
+.language-button { border: 1px solid #d9d0c0; background: transparent; color: #293d5e; padding: 10px 16px; border-radius: 999px; }
+.hero { max-width: 620px; min-height: 80vh; margin: 0 auto; padding: 50px 0 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.eyebrow { font-family: Arial, sans-serif; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #88754f; line-height: 1.7; }
+.rosary-art { width: 230px; height: 230px; margin: 22px 0; position: relative; display: grid; place-items: center; flex: 0 0 auto; }
+.bead-ring { position: absolute; inset: 12px; border: 1px dashed #cbb994; border-radius: 50%; }
+.bead { position: absolute; width: 12px; height: 12px; left: 50%; top: 50%; border-radius: 50%; background: #c9bea8; border: 2px solid #f7f4ed; transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px); }
+.bead.active { width: 18px; height: 18px; background: #536f9b; box-shadow: 0 0 0 5px #344b7020; }
+.center-symbol, .prayer-emblem, .completion-symbol { display: grid; place-items: center; border-radius: 50%; background: #ebe4d7; color: #405b83; }
+.center-symbol { width: 76px; height: 76px; font-size: 2.2rem; }
+h1 { max-width: 100%; font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.25; font-weight: normal; margin: 8px 0 14px; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.35rem); line-height: 1.3; font-weight: normal; margin: 10px 0 18px; }
+.description, .footer-note { color: #777164; line-height: 1.8; }
+.description { max-width: 430px; margin: 0 0 28px; }
+.primary-button, .secondary-button { border-radius: 999px; padding: 14px 24px; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease; }
+.primary-button { border: 0; background: #344b70; color: white; box-shadow: 0 8px 24px #344b7020; }
+.primary-button:hover { background: #263c60; transform: translateY(-2px); }
+.secondary-button { border: 1px solid #cfc4b1; background: #fffdf8; color: #344b70; }
+.secondary-button:hover { border-color: #8c7958; background: #f3eee4; }
+.text-button { border: 0; background: transparent; color: #536b8e; padding: 10px 12px; text-decoration: none; }
+.text-button:hover { color: #263c60; text-decoration: underline; }
+.footer-note { margin-top: 38px; font-size: .85rem; }
+.resume-card { margin-top: 24px; padding: 18px; width: min(100%, 450px); border: 1px solid #e4dccd; border-radius: 18px; background: #fffdf8b8; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.resume-card p { margin: 0 0 8px; line-height: 1.7; color: #777164; }
+.prayer-layout { width: min(100%, 760px); min-height: calc(100vh - 110px); margin: 0 auto; padding: 30px 0 46px; display: flex; flex-direction: column; align-items: center; text-align: center; animation: appear 260ms ease both; }
+.prayer-topline { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; }
+.back-link { align-self: flex-start; }
+.section-label { color: #88754f; font-size: .85rem; }
+.progress-block { width: min(100%, 600px); margin: 0 auto 28px; text-align: left; }
+.progress-caption { display: flex; justify-content: space-between; gap: 12px; font-size: .8rem; color: #777164; margin-bottom: 9px; }
+.progress-track { height: 5px; border-radius: 99px; background: #e8e0d2; overflow: hidden; }
+.progress-track span { display: block; height: 100%; background: #b39a69; border-radius: inherit; transition: width 220ms ease; }
+.prayer-card, .mystery-banner { width: 100%; padding: clamp(24px, 5vw, 46px); border: 1px solid #e6dece; border-radius: 26px; background: #fffdf8d9; box-shadow: 0 18px 55px #344b7008; }
+.prayer-card { display: flex; flex-direction: column; align-items: center; }
+.prayer-cross { color: #a28b60; font-size: 1.8rem; margin: 2px 0 10px; }
+.prayer-text, .reflection-text { max-width: 590px; white-space: pre-line; color: #4d5665; font-size: clamp(1.08rem, 2.6vw, 1.28rem); line-height: 1.95; margin: 12px auto 8px; }
+.prayer-text { text-wrap: pretty; }
+.bead-progress { display: flex; justify-content: center; gap: clamp(6px, 2vw, 12px); margin: 0 auto 28px; flex-wrap: wrap; }
+.prayer-bead { display: block; width: 15px; height: 15px; border-radius: 50%; background: #d9cfbb; border: 2px solid #f7f4ed; box-shadow: 0 0 0 1px #d2c5ad; }
+.prayer-bead.current { background: #344b70; box-shadow: 0 0 0 4px #344b7024; transform: scale(1.12); }
+.prayer-bead.passed { background: #b39a69; }
+.bead-count { font-size: .85rem; color: #88754f; margin: 20px 0 0; }
+.optional-label { border-radius: 99px; padding: 5px 11px; background: #f0e8d8; color: #786342; font: .72rem Arial, sans-serif; letter-spacing: .04em; }
+.mystery-banner { display: flex; flex-direction: column; align-items: center; }
+.mystery-number { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: #ebe4d7; color: #405b83; font-size: 1.4rem; margin: 10px 0 6px; }
+.reflection-label { font: .75rem Arial, sans-serif; text-transform: uppercase; letter-spacing: .16em; color: #88754f; margin: 20px 0 0; }
+.reflection-text { margin-top: 8px; }
+.prayer-navigation { display: flex; justify-content: space-between; align-items: center; gap: 14px; width: 100%; margin-top: 24px; }
+.prayer-navigation button { min-width: 140px; }
+.skip-button { margin-top: 8px; }
+.quiet-note { font-size: .85rem; color: #777164; margin-top: 22px; }
+.welcome-layout { justify-content: center; }
+.prayer-emblem, .completion-symbol { width: 76px; height: 76px; font-size: 2rem; margin: 20px 0; }
+.welcome-verse { max-width: 540px; padding: 22px 26px; margin: 0 0 26px; color: #4d5665; line-height: 1.9; border-left: 2px solid #b39a69; background: #fffdf8a6; border-radius: 0 14px 14px 0; }
+.completion-layout { justify-content: center; }
+.completion-note { color: #88754f; line-height: 1.8; margin: 0 0 28px; }
+@keyframes appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .app-shell { padding: 18px; }
+  .hero { min-height: 78vh; padding-top: 35px; }
+  .rosary-art { width: 205px; height: 205px; }
+  .bead { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-90px); }
+  .prayer-layout { min-height: calc(100vh - 90px); padding-top: 22px; }
+  .prayer-navigation { flex-direction: column-reverse; }
+  .prayer-navigation button { width: 100%; }
+  .prayer-topline { align-items: flex-start; }
+  .progress-caption { font-size: .72rem; }
+  .prayer-card, .mystery-banner { border-radius: 20px; }
+  .header-actions { gap: 4px; }
+  .home-link { font-size: .8rem; }
 }
-
-.brand {
-  color: #293d5e;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  letter-spacing: 0.2em;
-}
-
-.language-button {
-  border: 1px solid #d9d0c0;
-  background: transparent;
-  color: #293d5e;
-  padding: 10px 16px;
-  border-radius: 999px;
-}
-
-.hero {
-  max-width: 620px;
-  min-height: 80vh;
-  margin: 0 auto;
-  padding: 50px 0 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.eyebrow {
-  font-family: Arial, sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  color: #88754f;
-}
-
-.rosary-art {
-  width: 230px;
-  height: 230px;
-  margin: 22px 0;
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.bead-ring {
-  position: absolute;
-  inset: 12px;
-  border: 1px dashed #cbb994;
-  border-radius: 50%;
-}
-
-.bead {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  background: #c9bea8;
-  border: 2px solid #f7f4ed;
-  transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px);
-}
-
-.bead.active {
-  width: 18px;
-  height: 18px;
-  background: #536f9b;
-  box-shadow: 0 0 0 5px #536f7020;
-}
-
-.center-symbol {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: #ebe4d7;
-  color: #405b83;
-  font-size: 2.2rem;
-}
-
-h1 {
-  max-width: 100%;
-  font-size: clamp(2rem, 6vw, 3.4rem);
-  line-height: 1.2;
-  font-weight: normal;
-  margin: 8px 0 14px;
-}
-
-.description,
-.footer-note {
-  color: #777164;
-  line-height: 1.8;
-}
-
-.description {
-  max-width: 390px;
-  margin: 0 0 28px;
-}
-
-.primary-button {
-  border: 0;
-  border-radius: 999px;
-  background: #344b70;
-  color: white;
-  padding: 16px 28px;
-  box-shadow: 0 8px 24px #344b7020;
-  transition: transform 180ms ease, background 180ms ease;
-}
-
-.primary-button:hover {
-  background: #263c60;
-  transform: translateY(-2px);
-}
-
-.primary-button:focus-visible,
-.language-button:focus-visible {
-  outline: 3px solid #b89b65;
-  outline-offset: 4px;
-}
-
-.welcome-message {
-  color: #344b70;
-  margin-top: 20px;
-}
-
-.footer-note {
-  margin-top: 38px;
-  font-size: 0.85rem;
-}
-
-@media (max-width: 480px) {
-  .app-shell {
-    padding: 18px;
-  }
-
-  .hero {
-    min-height: 78vh;
-    padding-top: 35px;
-  }
-
-  .rosary-art {
-    width: 205px;
-    height: 205px;
-  }
-
-  .bead {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-90px);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
-  }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition: none !important; }
 }
