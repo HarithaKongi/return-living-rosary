@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@400;500;600&display=swap");
+
+:root {
+  font-family: Georgia, "Noto Serif Telugu", serif;
+  color: #293d5e;
+  background: #f7f4ed;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-shell {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 50% 40%, #fffdf8 0%, transparent 58%),
+    #f7f4ed;
+}
+
+.topbar {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  color: #293d5e;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+}
+
+.language-button {
+  border: 1px solid #d9d0c0;
+  background: transparent;
+  color: #293d5e;
+  padding: 10px 16px;
+  border-radius: 999px;
+}
+
+.hero {
+  max-width: 620px;
+  min-height: 80vh;
+  margin: 0 auto;
+  padding: 50px 0 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: #88754f;
+}
+
+.rosary-art {
+  width: 230px;
+  height: 230px;
+  margin: 22px 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.bead-ring {
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed #cbb994;
+  border-radius: 50%;
+}
+
+.bead {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  background: #c9bea8;
+  border: 2px solid #f7f4ed;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px);
+}
+
+.bead.active {
+  width: 18px;
+  height: 18px;
+  background: #536f9b;
+  box-shadow: 0 0 0 5px #536f7020;
+}
+
+.center-symbol {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ebe4d7;
+  color: #405b83;
+  font-size: 2.2rem;
+}
+
+h1 {
+  max-width: 100%;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.2;
+  font-weight: normal;
+  margin: 8px 0 14px;
+}
+
+.description,
+.footer-note {
+  color: #777164;
+  line-height: 1.8;
+}
+
+.description {
+  max-width: 390px;
+  margin: 0 0 28px;
+}
+
+.primary-button {
+  border: 0;
+  border-radius: 999px;
+  background: #344b70;
+  color: white;
+  padding: 16px 28px;
+  box-shadow: 0 8px 24px #344b7020;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.primary-button:hover {
+  background: #263c60;
+  transform: translateY(-2px);
+}
+
+.primary-button:focus-visible,
+.language-button:focus-visible {
+  outline: 3px solid #b89b65;
+  outline-offset: 4px;
+}
+
+.welcome-message {
+  color: #344b70;
+  margin-top: 20px;
+}
+
+.footer-note {
+  margin-top: 38px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding: 18px;
+  }
+
+  .hero {
+    min-height: 78vh;
+    padding-top: 35px;
+  }
+
+  .rosary-art {
+    width: 205px;
+    height: 205px;
+  }
+
+  .bead {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-90px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
