@@ -168,7 +168,7 @@ function readSaved() {
 
 export default function App() {
   const [savedAtLoad] = useState(() => readSaved());
-  const [language, setLanguage] = useState(savedAtLoad?.language || "en");
+  const [language, setLanguage] = useState(() => savedAtLoad?.language || localStorage.getItem("return-rosary-language") || "en");
   const [screen, setScreen] = useState("home");
   const [journeyIndex, setJourneyIndex] = useState(savedAtLoad?.index || 0);
   const [hasProgress, setHasProgress] = useState(Boolean(savedAtLoad && !savedAtLoad.complete));
@@ -182,6 +182,11 @@ export default function App() {
   const progress = Math.round(((journeyIndex + 1) / journey.length) * 100);
   const mysteryCount = current?.decade || (journeyIndex < 7 ? 0 : 1);
   const sectionLabel = current?.section === "opening" ? text.opening : current?.section === "closing" ? text.close : text.mysteriesLabel;
+
+  useEffect(() => {
+    document.documentElement.lang = language === "te" ? "te" : "en";
+    try { localStorage.setItem("return-rosary-language", language); } catch { /* ignore unavailable storage */ }
+  }, [language]);
 
   useEffect(() => {
     if (started && screen === "prayer" && !complete) {
