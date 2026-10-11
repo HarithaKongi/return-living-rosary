@@ -159,7 +159,7 @@ function buildJourney(text, setKey) {
 function readSaved() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    if (saved && typeof saved === "object" && ["en", "te"].includes(saved.language) && Number.isInteger(saved.index) && saved.index >= 0) return saved;
+    if (saved && typeof saved === "object" && ["en", "te"].includes(saved.language) && Number.isInteger(saved.index) && saved.index >= 0 && saved.index <= 100) return saved;
   } catch {
     // Ignore malformed browser storage and start a fresh journey.
   }
@@ -174,8 +174,9 @@ export default function App() {
   const [hasProgress, setHasProgress] = useState(Boolean(savedAtLoad && !savedAtLoad.complete));
   const [started, setStarted] = useState(false);
   const [complete, setComplete] = useState(Boolean(savedAtLoad?.complete));
+  const [mysterySet, setMysterySet] = useState(() => ["joyful", "sorrowful", "glorious", "luminous"].includes(savedAtLoad?.setKey) ? savedAtLoad.setKey : mysteryKeyForDay(new Date().getDay()));
   const text = copy[language];
-  const setKey = useMemo(() => mysteryKeyForDay(new Date().getDay()), []);
+  const setKey = mysterySet;
   const journey = useMemo(() => buildJourney(text, setKey), [text, setKey]);
   const current = journey[Math.min(journeyIndex, journey.length - 1)];
   const progress = Math.round(((journeyIndex + 1) / journey.length) * 100);
@@ -185,7 +186,7 @@ export default function App() {
   useEffect(() => {
     if (started && screen === "prayer" && !complete) {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ language, index: journeyIndex, complete: false, savedAt: new Date().toISOString() }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ language, index: journeyIndex, setKey, complete: false, savedAt: new Date().toISOString() }));
         setHasProgress(true);
       } catch {
         // Prayer still works if storage is unavailable.
@@ -194,6 +195,7 @@ export default function App() {
   }, [language, journeyIndex, started, screen, complete]);
 
   function beginFromStart() {
+    setMysterySet(mysteryKeyForDay(new Date().getDay()));
     setJourneyIndex(0);
     setStarted(true);
     setComplete(false);
@@ -209,7 +211,7 @@ export default function App() {
       setComplete(true);
       setScreen("complete");
       setHasProgress(false);
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ language, index: journeyIndex, complete: true, savedAt: new Date().toISOString() })); } catch { /* ignore */ }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ language, index: journeyIndex, setKey, complete: true, savedAt: new Date().toISOString() })); } catch { /* ignore */ }
       return;
     }
     setJourneyIndex((index) => Math.min(index + 1, journey.length - 1));
@@ -225,6 +227,7 @@ export default function App() {
 
   function startAgain() {
     try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    setMysterySet(mysteryKeyForDay(new Date().getDay()));
     setJourneyIndex(0);
     setStarted(false);
     setComplete(false);
