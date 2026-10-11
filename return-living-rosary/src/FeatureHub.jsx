@@ -155,6 +155,26 @@ export default function FeatureHub({ language = "en" }) {
 
   return <section className="feature-hub" aria-label={t.title}>
     <div className="feature-intro"><p className="eyebrow">RETURN · YOUR PRAYER SPACE</p><h2>{t.title}</h2><p className="description">{t.subtitle}</p></div>
+    <section className="rosary-audio-section" aria-labelledby="full-rosary-audio-title">
+      <div className="rosary-audio-heading">
+        <p className="feature-kicker">PRAY ALONG</p>
+        <h3 id="full-rosary-audio-title">{language === "te" ? "పూర్తి జపమాల ఆడియో ప్రార్థన" : "Pray the full Rosary with audio"}</h3>
+        <p>{language === "te" ? "మీకు నచ్చిన భాషలో ప్రార్థనను ఎంచుకుని ప్లే నొక్కండి." : "Choose your language and press play to pray along with the complete Rosary."}</p>
+      </div>
+      <div className="rosary-audio-grid">
+        <article className={"rosary-audio-card "+(language === "en" ? "language-current" : "")}>
+          <div className="rosary-audio-card-heading"><h4>English Rosary</h4><a href="https://youtu.be/gmzvvtuajIk?si=StGeIZzorhOIcSPF" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a></div>
+          <div className="rosary-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/gmzvvtuajIk?rel=0" title="Full Rosary prayer in English on YouTube" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+          <p className="feature-muted">English · Complete Rosary</p>
+        </article>
+        <article className={"rosary-audio-card "+(language === "te" ? "language-current" : "")}>
+          <div className="rosary-audio-card-heading"><h4>తెలుగు జపమాల</h4><a href="https://youtu.be/c3EGZ8NL6lw?si=7mQd_5XHL-6ugbkA" target="_blank" rel="noopener noreferrer">YouTube లో తెరవండి ↗</a></div>
+          <div className="rosary-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/c3EGZ8NL6lw?rel=0" title="పూర్తి తెలుగు జపమాల ప్రార్థన YouTube లో" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+          <p className="feature-muted">తెలుగు · పూర్తి జపమాల</p>
+        </article>
+      </div>
+      <p className="rosary-audio-note">{language === "te" ? "ఆడియోను ప్లే చేయడానికి ఇంటర్నెట్ అవసరం. వీడియోలు YouTube నుండి అందించబడతాయి." : "Internet is required to play these videos. Audio is streamed from YouTube, so it will not play offline."}</p>
+    </section>
     <div className="feature-grid">
       <article className="feature-card feature-verse"><p className="feature-kicker">{t.verse}</p><blockquote>{todayVerse[language]}</blockquote><p className="verse-ref">{todayVerse.ref}</p><p>{t.versePrompt}</p></article>
       <article className="feature-card feature-stats"><p className="feature-kicker">{t.stats}</p><div className="stats-row"><div><strong>{history.length}</strong><span>{t.completed}</span></div><div><strong>{streakFor(history)}</strong><span>{t.streak} ({t.days})</span></div></div><p className="feature-muted">{t.minutes}</p><p className="privacy-note">◈ {t.saved}</p></article>
