@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import FeatureHub from "./FeatureHub.jsx";
 
 const STORAGE_KEY = "return-rosary-progress-v1";
 
@@ -219,6 +220,13 @@ export default function App() {
   function next() {
     if (journeyIndex >= journey.length - 1) {
       setComplete(true);
+      try {
+        const historyKey = "return-rosary-history-v1";
+        const history = JSON.parse(localStorage.getItem(historyKey) || "[]");
+        const completedAt = new Date().toISOString();
+        history.push({ date: completedAt.slice(0, 10), at: completedAt });
+        localStorage.setItem(historyKey, JSON.stringify(history));
+      } catch { /* prayer completion should never depend on browser storage */ }
       setScreen("complete");
       setHasProgress(false);
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ language, index: journeyIndex, setKey, complete: true, savedAt: new Date().toISOString() })); } catch { /* ignore */ }
@@ -287,6 +295,8 @@ export default function App() {
           <p className="footer-note">{text.footer}</p>
         </section>
       )}
+
+      {isHome && <FeatureHub language={language} />}
 
       {screen === "welcome" && (
         <section className="prayer-layout welcome-layout">
