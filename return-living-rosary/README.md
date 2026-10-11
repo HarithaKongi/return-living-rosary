@@ -14,6 +14,13 @@ A mobile-friendly React application to help people begin, pause, and return to R
 - Previous/next navigation, visible progress, and highlighted beads.
 - Local browser storage to resume an unfinished prayer journey.
 - No account or server is required; progress stays in the browser.
+- Interactive 50-bead rosary explorer, daily Scripture verse, and reflections.
+- Personal prayer intentions saved locally on the device.
+- Prayer completion history, completed Rosary count, and gentle current streak statistics.
+- Browser speech playback for selected English and Telugu prayers (voice availability depends on the device).
+- Night mode, larger prayer text, and keyboard focus support.
+- Installable PWA manifest and service worker for caching the app shell for offline reopening.
+- Optional daily reminder using browser notifications while the app is open and notification permission is granted.
 
 ## Tech stack
 
@@ -63,7 +70,7 @@ return-living-rosary/
 
 ## Notes
 
-The app provides a guided text-based prayer experience. It does not currently include audio narration, offline/PWA support, or server-side syncing.
+Audio uses built-in browser speech synthesis, not recorded narration. Telugu playback depends on an installed Telugu speech voice. Reminder notifications are checked while the app is open; reliable reminders after closing the app require a push-notification backend. Offline caching begins after a successful online visit, and browser support varies. Intentions and statistics are stored locally and do not sync between devices.
 
 ## License
 
