@@ -1,10 +1,26 @@
-const CACHE_NAME = "return-living-rosary-v1";
+const CACHE_NAME = "return-living-rosary-v2";
 const APP_SHELL = ["/", "/index.html", "/manifest.webmanifest", "/icons/return-192.svg", "/icons/return-512.svg"];
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(APP_SHELL);
+    // Cache the hashed Vite JavaScript/CSS files too, so a first successful
+    // online visit can be reopened offline after the worker activates.
+    try {
+      const response = await fetch("/index.html");
+      const html = await response.text();
+      const assets = [...html.matchAll(/(?:src|href)="([^"]+\.(?:js|css)(?:\?[^"]*)?)"/g)]
+        .map((match) => new URL(match[1], self.location.origin).href)
+        .filter((asset) => new URL(asset).origin === self.location.origin);
+      await Promise.all(assets.map(async (asset) => {
+        try { const assetResponse = await fetch(asset); if (assetResponse.ok) await cache.put(asset, assetResponse); } catch { /* best effort */ }
+      }));
+    } catch { /* the app shell is still cached if available */ }
+    await self.skipWaiting();
+  })());
 });
 self.addEventListener("activate", (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith("return-living-rosary-") && key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim()));
 });
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
