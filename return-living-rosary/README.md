@@ -1,17 +1,19 @@
 # RETURN — The Living Rosary Path
 
-A mobile-friendly React web app concept designed to help people begin, pause, and return to Rosary prayer without pressure.
+A mobile-friendly React application to help people begin, pause, and return to Rosary prayer without pressure.
 
-## Current status
+## Current features
 
-**Prototype / Phase 1.** This version includes:
-- A welcoming home screen
-- English and Telugu interface text toggle
-- Responsive styling
-- An illustrative bead ring
-- A simple start interaction
-
-The Rosary sequence, verified prayer texts, progress saving, offline support, and audio are planned for later phases. The current bead illustration is not yet a functional prayer guide.
+- Responsive landing page and RETURN branding.
+- English and Telugu interface and prayer text.
+- Guided opening prayers, including the Sign of the Cross, Apostles' Creed, Our Father, three Hail Marys, and Glory Be.
+- Daily mysteries selected using the user's local weekday.
+- Five mysteries and five decades, with ten individually counted Hail Marys per decade.
+- Our Father, Glory Be, and optional Fatima Prayer for each decade.
+- Closing prayers and a completion screen.
+- Previous/next navigation, visible progress, and highlighted beads.
+- Local browser storage to resume an unfinished prayer journey.
+- No account or server is required; progress stays in the browser.
 
 ## Tech stack
 
@@ -23,54 +25,45 @@ The Rosary sequence, verified prayer texts, progress saving, offline support, an
 
 Requirements: Node.js LTS and npm.
 
-```bash
+\`\`\`bash
 npm install
 npm run dev
-```
+\`\`\`
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+Open the local URL printed by Vite, usually \`http://localhost:5173\`.
 
 ## Production build
 
-```bash
+\`\`\`bash
 npm run build
 npm run preview
-```
+\`\`\`
 
-The production output is generated in `dist/`.
+The production output is generated in \`dist/\`.
 
 ## Project structure
 
-```text
+\`\`\`text
 return-living-rosary/
-├── public/
 ├── src/
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
-├── .gitignore
 ├── index.html
 ├── package.json
-├── vite.config.js
 └── README.md
-```
+\`\`\`
 
 ## Product principles
 
 - Prayer should feel welcoming, not competitive.
 - No streak pressure or guilt-inducing messages.
-- Keep personal prayer progress local by default.
-- Review translations and prayer order with a knowledgeable Catholic reviewer before release.
+- Personal prayer progress stays local by default.
+- Prayer wording and Telugu translations should be reviewed by a knowledgeable Catholic reviewer before public release.
 
-## Roadmap
+## Notes
 
-1. Validate the user problem and refine the signature interaction.
-2. Implement the traditional Rosary prayer sequence and mysteries.
-3. Add functional bead navigation, pause, and resume.
-4. Add locally saved progress.
-5. Review English and Telugu prayer texts.
-6. Add offline/PWA support and test on mobile.
-7. Consider an Android release after validating the web version.
+The app provides a guided text-based prayer experience. It does not currently include audio narration, offline/PWA support, or server-side syncing.
 
 ## License
 
