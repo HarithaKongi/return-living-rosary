@@ -156,6 +156,11 @@ function buildJourney(text, setKey) {
   return steps;
 }
 
+function readLanguage(savedLanguage) {
+  if (["en", "te"].includes(savedLanguage)) return savedLanguage;
+  try { return localStorage.getItem("return-rosary-language") || "en"; } catch { return "en"; }
+}
+
 function readSaved() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -168,7 +173,7 @@ function readSaved() {
 
 export default function App() {
   const [savedAtLoad] = useState(() => readSaved());
-  const [language, setLanguage] = useState(() => savedAtLoad?.language || localStorage.getItem("return-rosary-language") || "en");
+  const [language, setLanguage] = useState(() => readLanguage(savedAtLoad?.language));
   const [screen, setScreen] = useState("home");
   const [journeyIndex, setJourneyIndex] = useState(savedAtLoad?.index || 0);
   const [hasProgress, setHasProgress] = useState(Boolean(savedAtLoad && !savedAtLoad.complete));
