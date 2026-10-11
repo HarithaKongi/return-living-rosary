@@ -223,8 +223,10 @@ export default function App() {
       try {
         const historyKey = "return-rosary-history-v1";
         const history = JSON.parse(localStorage.getItem(historyKey) || "[]");
-        const completedAt = new Date().toISOString();
-        history.push({ date: completedAt.slice(0, 10), at: completedAt });
+        const now = new Date();
+        const completedAt = now.toISOString();
+        const localDate = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, "0"), String(now.getDate()).padStart(2, "0")].join("-");
+        history.push({ date: localDate, at: completedAt });
         localStorage.setItem(historyKey, JSON.stringify(history));
       } catch { /* prayer completion should never depend on browser storage */ }
       setScreen("complete");
